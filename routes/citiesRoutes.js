@@ -77,8 +77,16 @@ router.get('/:id/places/:placeId', async (req, res) => {
 //---Получить места по фильтру
 router.get('/:id/places', async (req, res) => {
 	const gettingData = await Data.findById(req.params.id);
-	const { page, search, rating, sortBy, orderBy, locals, ...filters } =
-		req.query;
+	const {
+		page,
+		search,
+		rating,
+		sortBy,
+		orderBy,
+		locals,
+		district,
+		...filters
+	} = req.query;
 	let places = gettingData.places;
 	let pageCount = 0;
 	let placeSliceEnd = '';
@@ -136,6 +144,9 @@ router.get('/:id/places', async (req, res) => {
 	}
 	if (locals) {
 		places = places.filter(i => i.localsChoice);
+	}
+	if (district) {
+		places = _.filter(places, { district: district });
 	}
 	pageCount = Math.ceil(places.length / limit);
 	placeSliceEnd = pageCount === page ? null : page * limit;
