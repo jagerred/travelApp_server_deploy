@@ -25,8 +25,9 @@ router.post('/:cityId/addplace', async (req, res) => {
 router.get('/:id/place/:search', async (req, res) => {
 	try {
 		const gettingData = await Data.findById(req.params.id);
+		const searchLowerCase = req.params.search.toLowerCase();
 		const filteredData = gettingData.places.filter(item =>
-			item.name.toLowerCase().includes(req.params.search)
+			item.name.toLowerCase().includes(searchLowerCase)
 		);
 		res.json(filteredData);
 	} catch (error) {
@@ -35,8 +36,9 @@ router.get('/:id/place/:search', async (req, res) => {
 });
 router.get('/:search', async (req, res) => {
 	const gettingData = await Data.find({}, { name: 1 });
+	const searchLowerCase = req.params.search.toLowerCase();
 	const filteredData = gettingData.filter(item =>
-		item.name.toLowerCase().includes(req.params.search)
+		item.name.toLowerCase().includes(searchLowerCase)
 	);
 	res.json(filteredData);
 });
