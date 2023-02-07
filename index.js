@@ -17,7 +17,6 @@ const PORT = 3001;
 const app = express();
 
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../client/build')));
 app.use('/', cityRoutes);
 app.use('/filters', filtersRoutes);
 app.use('/users', usersRoutes);
