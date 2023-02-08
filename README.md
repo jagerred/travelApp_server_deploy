@@ -18,4 +18,4 @@ ___
 npm run dev 
 ```
 ## Стек: 
-__Сервер:__ Node JS · Express JS · MongoDB · Multer  
+Node JS · Express JS · MongoDB · Multer  
